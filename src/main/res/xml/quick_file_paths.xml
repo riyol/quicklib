@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path
+        name="fp-1"
+        path="/"/>
+    <files-path
+        name="fp0"
+        path="images"/>
+
+    <external-files-path
+        name="efp-1"
+        path="/"/>
+    <external-files-path
+        name="efp0"
+        path="images"/>
+
+    <cache-path
+        name="cp-1"
+        path="/"/>
+    <cache-path
+        name="cp0"
+        path="images"/>
+
+    <external-cache-path
+        name="ecp-1"
+        path="/"/>
+    <external-cache-path
+        name="ecp0"
+        path="images"/>
+
+    <external-path
+        name="ep-1"
+        path="/"/>
+    <external-path
+        name="ep0"
+        path="images"/>
+
+</paths>

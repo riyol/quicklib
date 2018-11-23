@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="wrapped_clearable_image" type="id"/>
+    <item name="wrapped_password_toggle_image" type="id"/>
+    <item name="wrapped_text_input" type="id"/>
+
+    <dimen name="wrap_vertical_space">18dp</dimen>
+    <dimen name="wrap_horizontal_space">8dp</dimen>
+    <dimen name="wrap_icon_width">31dp</dimen>
+    <dimen name="wrap_icon_height">31dp</dimen>
+
+    <dimen name="wrap_divider_size">0.5dp</dimen>
+
+    <color name="wrap_divider_color">#1f000000</color>
+
+    <item name="wrap_image" type="id"/>
+    <item name="wrap_text" type="id"/>
+    <item name="wrap_toolbar_title" type="id"/>
+    <item name="wrap_divider" type="id"/>
+    <item name="wrap_arrow_right" type="id"/>
+    <item name="wrap_value" type="id"/>
+
+    <declare-styleable name="ToggleImage">
+        <attr name="zyOpenRes" format="reference"/>
+        <attr name="zyCloseRes" format="reference"/>
+        <attr name="zyIsClose" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="ClearableInputText">
+        <attr name="wrapped_layout" format="reference"/>
+    </declare-styleable>
+
+
+    <style name="ImageTextWrapper"/>
+
+    <style name="ImageTextWrapper.Text" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <declare-styleable name="ImageTextWrapper">
+        <attr name="wrap_image" format="reference"/>
+        <attr name="wrap_text" format="string"/>
+        <attr name="wrap_divider_color" format="color"/>
+        <attr name="wrap_divider_visible" format="boolean"/>
+        <attr name="wrap_layout" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TitleValueWrapper">
+        <attr name="wrap_text"/>
+        <attr name="wrap_value" format="string"/>
+        <attr name="wrap_title_format" format="string"/>
+        <attr name="wrap_divider_color"/>
+        <attr name="wrap_divider_visible"/>
+        <attr name="wrap_layout"/>
+    </declare-styleable>
+
+    <declare-styleable name="CenterTitleToolbarWrapper">
+        <attr name="wrap_text_layout" format="reference"/>
+        <attr name="android:textColor"/>
+        <attr name="android:text"/>
+    </declare-styleable>
+
+    <attr name="dotRadius" format="dimension" />
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="android:gravity" />
+        <attr name="dotRadius" />
+        <attr name="viewPagerId" format="reference" />
+        <attr name="dotPadding" format="dimension" />
+        <attr name="selectedDotColor" format="color" />
+        <attr name="unselectedDotColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorDotView">
+        <attr name="dotRadius" />
+        <attr name="dotColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RippleBackground">
+        <attr name="rb_color" format="color" />
+        <attr name="rb_strokeWidth" format="dimension"/>
+        <attr name="rb_radius" format="dimension"/>
+        <attr name="rb_duration" format="integer"/>
+        <attr name="rb_rippleAmount" format="integer"/>
+        <attr name="rb_scale" format="float"/>
+        <attr name="rb_type" format="enum">
+            <enum name="fillRipple" value="0"/>
+            <enum name="strokeRipple" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

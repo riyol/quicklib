@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+       tools:parentTag="android.support.constraint.ConstraintLayout"
+    >
+
+    <TextView
+        android:id="@+id/wrap_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/wrap_vertical_space"
+        android:paddingLeft="@dimen/wrap_horizontal_space"
+        android:paddingRight="@dimen/wrap_horizontal_space"
+        android:paddingTop="@dimen/wrap_vertical_space"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="标题"/>
+
+    <ImageView
+        android:id="@+id/wrap_arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/wrap_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wrap_text"
+        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+    <View
+        android:id="@+id/wrap_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/wrap_divider_size"
+        android:background="@color/wrap_divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wrap_text"/>
+
+    <TextView
+        android:id="@+id/wrap_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="right"
+        android:paddingBottom="@dimen/wrap_vertical_space"
+        android:paddingTop="@dimen/wrap_vertical_space"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/wrap_text"
+        app:layout_constraintEnd_toStartOf="@+id/wrap_arrow_right"
+        app:layout_constraintStart_toEndOf="@+id/wrap_text"
+        app:layout_constraintTop_toTopOf="@+id/wrap_text"/>
+</merge>

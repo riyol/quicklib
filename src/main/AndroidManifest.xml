@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.riyol.quicklib">
+
+    <application>
+        <provider
+            android:name="com.riyol.permission.ContentFileProvider"
+            android:authorities="${applicationId}.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/quick_file_paths">
+            </meta-data>
+        </provider>
+    </application>
+</manifest>
