@@ -14,6 +14,8 @@ Android Data Binding、ViewModel 与 Material design开发库
 * MaterialAlertDialog
 
 ## 使用示例：
+```
+//Sample class
 public class ListFragment extends VMBindingFragment<ServiceViewModel, FragmentListBinding> {
 
 
