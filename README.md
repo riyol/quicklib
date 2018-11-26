@@ -55,3 +55,4 @@ public class ListFragment extends VMBindingFragment<ServiceViewModel, FragmentLi
 ```
 ## Material design Dialog:
 * MaterialAlertDialog
+![alt sample](https://github.com/riyol/quicklib/blob/master/Screenshot/Screenshot_20181126-173446.jpg)
