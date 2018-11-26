@@ -10,9 +10,6 @@ Android Data Binding、ViewModel 与 Material design开发库
 * VMBindingActivity
 * VMBindingMaterialActivity
 * VMBindingFragment
-## Material design Dialog:
-* MaterialAlertDialog
-
 ## 使用示例：
 ```
 //Sample class
@@ -55,4 +52,6 @@ public class ListFragment extends VMBindingFragment<ServiceViewModel, FragmentLi
         }
     }
 }
-
+```
+## Material design Dialog:
+* MaterialAlertDialog
