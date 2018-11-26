@@ -22,8 +22,8 @@ import com.riyol.permission.PermissionHelper;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+    private static String TAG = "BaseActivity";
     private DefaultLoadingDialog loadingDialog;
-
     private PermissionHelper permissionHelper;
 
     protected static Intent makeActivityIntent(Context context, Class<? extends Activity> cls) {
@@ -45,18 +45,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.w("BaseActivity", "onPause");
+        Log.w(TAG, "onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.w("BaseActivity", "onResume");
+        Log.w(TAG, "onResume");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.w(TAG, "onStart");
     }
 
     @Override
@@ -66,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             loadingDialog = null;
         }
         super.onStop();
-        Log.w("BaseActivity", "onStop");
+        Log.w(TAG, "onStop");
     }
 
     @Override
