@@ -10,7 +10,6 @@ import com.riyol.function.Supplier;
 import com.riyol.navigate.Navigate;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public abstract class BaseViewModel extends ViewModel {
 
     private MutableLiveData<Boolean> loadState;
 
-    private final List<Disposable> disposableList = Collections.synchronizedList(new ArrayList<Disposable>());
+    private final List<Disposable> disposableList = new ArrayList<>();
 
     private final CompositeDisposable compositeDisposable;
 

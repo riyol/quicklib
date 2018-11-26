@@ -212,7 +212,7 @@ public class PermissionHelper {
         }
 
         if (!deniedList.isEmpty()) {
-            executeDeniedCallback(prohibitList);
+            executeDeniedCallback(deniedList);
             return;
         }
         executeGrantedCallback();

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.riyol.base.dialog.DefaultLoadingDialog;
-import com.riyol.permission.PermissionHelper;
 
 
 /**
@@ -24,7 +22,6 @@ import com.riyol.permission.PermissionHelper;
 public abstract class BaseActivity extends AppCompatActivity {
     private static String TAG = "BaseActivity";
     private DefaultLoadingDialog loadingDialog;
-    private PermissionHelper permissionHelper;
 
     protected static Intent makeActivityIntent(Context context, Class<? extends Activity> cls) {
         Intent intent = new Intent(context, cls);
@@ -121,31 +118,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return new DefaultLoadingDialog();
     }
 
-    /**
-     * Runtime permiss
-     **/
-    protected final PermissionHelper permissionHelper() {
-        if (permissionHelper == null) {
-            permissionHelper = new PermissionHelper();
-        }
-        return permissionHelper;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
-            grantResults) {
-
-        if (permissionHelper != null) {
-            if (permissionHelper.onRequestPermissionsResult(this, requestCode, permissions, grantResults)) {
-                return;
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    /**
-     * end permission
-     */
 
     @LayoutRes
     protected int layoutRes() {

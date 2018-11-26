@@ -18,7 +18,7 @@ public abstract class VMBindingActivity<VM extends BaseViewModel, VB extends Vie
     protected VM viewModel;
 
     @Override
-    protected void setUpModel(Bundle savedState) {
+    final protected void setUpModel(Bundle savedState) {
         super.setUpModel(savedState);
 
         Supplier<VM> supplier = provideViewModelSupplier();
