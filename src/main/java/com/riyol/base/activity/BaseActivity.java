@@ -21,6 +21,7 @@ import com.riyol.base.dialog.DefaultLoadingDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private static String TAG = "BaseActivity";
+
     private DefaultLoadingDialog loadingDialog;
 
     protected static Intent makeActivityIntent(Context context, Class<? extends Activity> cls) {
@@ -37,24 +38,74 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (layoutRes() != 0) {
             setContentView(layoutRes());
         }
+        debugLifecycleMethod("onCreate");
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        debugLifecycleMethod("onWindowFocusChanged");
+    }
+
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        debugLifecycleMethod("onDetachedFromWindow");
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        debugLifecycleMethod("onAttachedToWindow");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        debugLifecycleMethod("onNewIntent");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        debugLifecycleMethod("onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        debugLifecycleMethod("onRestoreInstanceState");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.w(TAG, "onPause");
+        debugLifecycleMethod("onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.w(TAG, "onResume");
+        debugLifecycleMethod("onResume");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        debugLifecycleMethod("onPostResume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        debugLifecycleMethod("onRestart");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.w(TAG, "onStart");
+        debugLifecycleMethod("onStart");
     }
 
     @Override
@@ -64,12 +115,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             loadingDialog = null;
         }
         super.onStop();
-        Log.w(TAG, "onStop");
+        debugLifecycleMethod("onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        debugLifecycleMethod("onDestroy");
     }
 
     @Override
@@ -120,7 +172,21 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     @LayoutRes
-    protected int layoutRes() {
-        return 0;
+    protected abstract int layoutRes();
+
+    private String activityName;
+
+    private void debugLifecycleMethod(String lifecycle) {
+
+        if (activityName == null) {
+            activityName = getClass().getSimpleName();
+        }
+
+        String postFix = " ";
+        if (lifecycle.equals("onPause")) {
+            postFix += ("Finishing:" + isFinishing());
+        }
+
+        Log.d(TAG, "[==== " + activityName + " ====]:" + lifecycle + postFix + "\n");
     }
 }

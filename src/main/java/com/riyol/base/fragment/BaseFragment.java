@@ -10,18 +10,22 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.riyol.base.dialog.DefaultLoadingDialog;
 import com.riyol.function.Optional;
 import com.riyol.permission.PermissionHelper;
+import com.riyol.quicklib.BuildConfig;
 
 
 /**
  * Created by Administrator on 2018/6/8 0008.
  */
 public abstract class BaseFragment extends Fragment {
+    private static String TAG = "BaseFragment";
     private Activity activity;
     private DefaultLoadingDialog loadingDialog;
 
@@ -34,26 +38,42 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        debugLifecycleMethodLog("onCreate");
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        debugLifecycleMethodLog("onSaveInstanceState");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        debugLifecycleMethodLog("onActivityCreated");
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        debugLifecycleMethodLog("onPause");
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        debugLifecycleMethodLog("onResume");
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        debugLifecycleMethodLog("onStart");
+
     }
 
     @Override
@@ -63,16 +83,21 @@ public abstract class BaseFragment extends Fragment {
             loadingDialog = null;
         }
         super.onStop();
+        debugLifecycleMethodLog("onStop");
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        debugLifecycleMethodLog("onDestroy");
+
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        debugLifecycleMethodLog("onAttach");
         if (context instanceof Activity) {
             activity = (Activity) context;
         }
@@ -85,6 +110,15 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         activity = null;
         super.onDetach();
+        debugLifecycleMethodLog("onDetach");
+    }
+
+
+    @NonNull
+    @Override
+    public LayoutInflater onGetLayoutInflater(@Nullable Bundle savedInstanceState) {
+        debugLifecycleMethodLog("onGetLayoutInflater");
+        return super.onGetLayoutInflater(savedInstanceState);
     }
 
     public void setToolbarTitle(int strId) {
@@ -170,5 +204,14 @@ public abstract class BaseFragment extends Fragment {
     /**
      * end permission
      */
+
+
+    protected void debugLifecycleMethodLog(String lifecycle) {
+        if (!BuildConfig.DEBUG) {
+            return;
+        }
+        String fragmentName = getClass().getSimpleName();
+        Log.d(TAG, "[==== " + fragmentName + " ====]:" + lifecycle + "\n");
+    }
 
 }

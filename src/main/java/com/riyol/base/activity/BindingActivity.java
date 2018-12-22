@@ -120,6 +120,11 @@ public abstract class BindingActivity<VB extends ViewDataBinding>
         return R.id.coordinator_layout;
     }
 
+    @Override
+    protected int layoutRes() {
+        return 0;
+    }
+
     @LayoutRes
     protected abstract int bindingLayoutRes();
 }
