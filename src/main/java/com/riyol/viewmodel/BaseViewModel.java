@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.riyol.function.Optional;
 import com.riyol.function.Supplier;
+import com.riyol.navigate.ActionEnum;
 import com.riyol.navigate.Navigate;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public abstract class BaseViewModel extends ViewModel {
-    private final Application application;
+    protected final Application application;
     private MutableLiveData<Throwable> throwable;
 
     private MutableLiveData<Navigate> navigate;
@@ -97,6 +98,11 @@ public abstract class BaseViewModel extends ViewModel {
 
     final public void setThrowable(Throwable t) {
         Optional.ofNullable(throwable).ifPresent(data -> data.setValue(t));
+        onThrowable(t);
+    }
+
+    protected void onThrowable(Throwable t){
+        //Todo
     }
 
     final public MutableLiveData<Navigate> getNavigateObservable() {
@@ -105,6 +111,10 @@ public abstract class BaseViewModel extends ViewModel {
 
     final public void setNavigate(Navigate nav) {
         Optional.ofNullable(this.navigate).ifPresent(data -> data.setValue(nav));
+    }
+
+    final public void setNavigate(ActionEnum action){
+        setNavigate(Navigate.create(action));
     }
 
     final public MutableLiveData<Boolean> getLoadStateObservable() {
