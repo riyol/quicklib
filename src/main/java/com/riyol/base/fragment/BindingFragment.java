@@ -19,6 +19,7 @@ public abstract class BindingFragment<VB extends ViewDataBinding>
         viewBinding = DataBindingUtil.inflate(
                 inflater, layoutRes(), container, false);
         viewBinding.setLifecycleOwner(this);
+        savedInstanceState = (savedInstanceState == null) ? getArguments() : savedInstanceState;
         performDataBinding(savedInstanceState);
         return viewBinding.getRoot();
     }

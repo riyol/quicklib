@@ -34,11 +34,11 @@ public abstract class VMBindingFragment<VM extends BaseViewModel, VB extends Vie
             viewModel.getThrowableObservable().observe(this, throwable -> onThrowable(throwable));
             viewModel.getLoadStateObservable().observe(this, loading -> onLoadState(loading));
         }
-        setupView();
+        setupView(savedState);
         viewBinding.setVariable(BR.viewModel, viewModel);
     }
 
-    protected void setupView(){}
+    protected void setupView(Bundle savedState){}
 
     protected void onNavigate(Navigate nav) {
     }
