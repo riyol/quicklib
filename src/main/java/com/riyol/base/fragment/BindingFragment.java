@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,20 @@ public abstract class BindingFragment<VB extends ViewDataBinding>
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        viewBinding = DataBindingUtil.inflate(
-                inflater, layoutRes(), container, false);
-        viewBinding.setLifecycleOwner(this);
+        super.onCreateView(inflater, container, savedInstanceState);
+        if (viewBinding == null) {
+            viewBinding = DataBindingUtil.inflate(
+                    inflater, layoutRes(), container, false);
+            viewBinding.setLifecycleOwner(this);
+        }
+        return viewBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         savedInstanceState = (savedInstanceState == null) ? getArguments() : savedInstanceState;
         performDataBinding(savedInstanceState);
-        return viewBinding.getRoot();
     }
 
     private void performDataBinding(Bundle savedState) {

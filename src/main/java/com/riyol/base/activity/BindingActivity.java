@@ -81,9 +81,9 @@ public abstract class BindingActivity<VB extends ViewDataBinding>
             return;
         }
         setSupportActionBar(toolbar);
-
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(displayHomeAsUpEnable());
+        ab.setDisplayShowTitleEnabled(false);
     }
 
     protected boolean displayHomeAsUpEnable() {

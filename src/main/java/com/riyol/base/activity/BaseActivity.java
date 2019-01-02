@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.riyol.base.dialog.DefaultLoadingDialog;
+import com.riyol.utils.ToastUtil;
 
 
 /**
@@ -164,6 +166,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (loadingDialog != null) {
             loadingDialog.dismissAllowingStateLoss();
         }
+    }
+
+    final protected void showToast(@StringRes int strId) {
+        showToast(getString(strId));
+    }
+
+    final protected void showToast(String message) {
+        ToastUtil.showToast(getApplicationContext(), message);
     }
 
     protected DefaultLoadingDialog createLoadingDialog() {
