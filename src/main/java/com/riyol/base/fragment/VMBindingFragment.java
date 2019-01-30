@@ -1,5 +1,6 @@
 package com.riyol.base.fragment;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.ViewDataBinding;
@@ -23,13 +24,13 @@ public abstract class VMBindingFragment<VM extends BaseViewModel, VB extends Vie
         if (viewModel == null) {
             Supplier<VM> supplier = provideViewModelSupplier();
             ViewModelProvider.Factory factory = supplier == null ? null : ViewModelProviderFactory.create(supplier);
-            Class<VM> viewModelClass = provideViewModelClass();
+            Class<?> viewModelClass = getViewModelClass();//provideViewModelClass();
             Objects.requireNonNull(viewModelClass, "viewModelClass is null");
 
             boolean shareViewModel = shouldShareViewModel();
             ViewModelProvider viewModelProvider = shareViewModel ?
                     ViewModelProviders.of(getActivity()) : ViewModelProviders.of(this, factory);
-            viewModel = viewModelProvider.get(viewModelClass);
+            viewModel = viewModelProvider.get((Class<VM>)viewModelClass);
             if (!shareViewModel) {
                 viewModel.getNavigateObservable().observe(this, nav -> onNavigate(nav));
                 viewModel.getThrowableObservable().observe(this, throwable -> onThrowable(throwable));
@@ -38,6 +39,16 @@ public abstract class VMBindingFragment<VM extends BaseViewModel, VB extends Vie
             viewBinding.setVariable(BR.viewModel, viewModel);
         }
         setupView(savedState);
+    }
+
+    private Class<?> getViewModelClass() {
+        if (shouldShareViewModel()) {
+            Activity a = getActivity();
+            if (a instanceof IViewModelProvider) {
+                return ((IViewModelProvider) a).provideViewModelClass();
+            }
+        }
+        return provideViewModelClass();
     }
 
     protected void setupView(Bundle savedState) {
