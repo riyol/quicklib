@@ -5,16 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.riyol.base.dialog.DefaultLoadingDialog;
+import com.riyol.base.dialog.MaterialAlertDialog;
+import com.riyol.function.Optional;
+import com.riyol.permission.PermissionHelper;
+import com.riyol.quicklib.R;
 import com.riyol.utils.ToastUtil;
+
+import java.util.List;
 
 
 /**
@@ -25,6 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private static String TAG = "BaseActivity";
 
     private DefaultLoadingDialog loadingDialog;
+
+    private PermissionHelper permissionHelper;
 
     protected static Intent makeActivityIntent(Context context, Class<? extends Activity> cls) {
         Intent intent = new Intent(context, cls);
@@ -180,6 +190,72 @@ public abstract class BaseActivity extends AppCompatActivity {
         return new DefaultLoadingDialog();
     }
 
+
+    /**
+     * Runtime permiss
+     **/
+    protected final PermissionHelper permissionHelper() {
+        if (permissionHelper == null) {
+            permissionHelper = new PermissionHelper();
+        }
+        return permissionHelper;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
+            grantResults) {
+
+        if (permissionHelper != null) {
+            if (permissionHelper.onRequestPermissionsResult(this, requestCode, permissions, grantResults)) {
+                return;
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    private MaterialAlertDialog rationaleDialog;
+    protected PermissionHelper.RationaleCallback rationaleCallback = (permissions) -> {
+        if (rationaleDialog != null) {
+            return;
+        }
+        List<String> message = PermissionHelper.transformText(getApplicationContext(), permissions);
+        rationaleDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
+                .setTitle(R.string.permission_rationale_title)
+                .setMessage(String.format(getString(R.string.permission_rationale_message),
+                        TextUtils.join("\n", message)))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (tag, which) ->
+                        Optional.ofNullable(permissionHelper).ifPresent(h -> h.requestDisallowIntercept(this))
+                )
+                .build();
+        rationaleDialog.show(this);
+
+    };
+
+    private MaterialAlertDialog deniedDialog;
+    protected PermissionHelper.DeniedCallback deniedCallback = permissions -> {
+        if (deniedDialog != null) {
+            return;
+        }
+        List<String> message = PermissionHelper.transformText(getApplicationContext(), permissions);
+        deniedDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
+                .setTitle(R.string.permission_denied_title)
+                .setMessage(String.format(getString(R.string.permission_rationale_message),
+                        TextUtils.join("\n", message)))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.permission_setting, (tag, which) -> {
+//                    Optional.ofNullable(permissionHelper).ifPresent(h -> h.requestDisallowIntercept(this));
+                    startActivity(PermissionHelper.defaultApi(getApplicationContext()));
+                    finish();
+                })
+                .build();
+        deniedDialog.show(this);
+    };
+
+    /**
+     * end permission
+     */
 
     @LayoutRes
     protected abstract int layoutRes();

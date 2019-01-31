@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="view_pager_bottom_sheet_behavior" translatable="false">com.riyol.bottomsheet.ViewPagerBottomSheetBehavior</string>
+
+    <string name="permission_rationale_title">申请权限</string>
+    <string name="permission_denied_title">申请权限失败</string>
+    <string name="permission_rationale_message">该功能需要使用以下权限：\n\n%1$s</string>
+    <string name="permission_name_calendar">日历</string>
+    <string name="permission_name_camera">相机</string>
+    <string name="permission_name_contacts">通讯录</string>
+    <string name="permission_name_location">位置信息</string>
+    <string name="permission_name_storage">存储空间</string>
+    <string name="permission_setting">去开启权限</string>
+</resources>
