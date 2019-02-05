@@ -60,14 +60,14 @@ public abstract class BindingActivity<VB extends ViewDataBinding>
             viewBinding = DataBindingUtil.setContentView(this, bindingLayoutRes());
         }
         viewBinding.setLifecycleOwner(this);
-        setUpView(bundle);
-        setUpModel(bundle);
+        setupView(bundle);
+        setupModel(bundle);
     }
 
-    protected void setUpModel(Bundle savedState) {
+    protected void setupModel(Bundle savedState) {
     }
 
-    protected void setUpView(Bundle savedState) {
+    protected void setupView(Bundle savedState) {
         coordinatorLayout = findViewById(R.id.coordinator_layout);
         appBarLayout = findViewById(R.id.app_bar_layout);
         tabLayout = findViewById(R.id.tab_layout);
