@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -148,7 +147,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void hideKeyboard() {
+    final protected void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)
@@ -157,12 +156,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void startActivity(Class<? extends Activity> cls) {
+    final protected void startActivity(Class<? extends Activity> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
     }
 
-    protected void showLoadingDialog() {
+    final protected void startActivityForClearTask(Class<? extends Activity> cls) {
+        Intent intent = new Intent(this, cls);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    final protected void showLoadingDialog() {
         if (loadingDialog == null) {
             loadingDialog = createLoadingDialog();
         }
@@ -172,7 +177,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void hideLoadingDialog() {
+    final protected void hideLoadingDialog() {
         if (loadingDialog != null) {
             loadingDialog.dismissAllowingStateLoss();
         }
@@ -264,15 +269,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void debugLifecycleMethod(String lifecycle) {
 
-        if (activityName == null) {
-            activityName = getClass().getSimpleName();
-        }
-
-        String postFix = " ";
-        if (lifecycle.equals("onPause")) {
-            postFix += ("Finishing:" + isFinishing());
-        }
-
-        Log.d(TAG, "[==== " + activityName + " ====]:" + lifecycle + postFix + "\n");
+//        if (activityName == null) {
+//            activityName = getClass().getSimpleName();
+//        }
+//
+//        String postFix = " ";
+//        if (lifecycle.equals("onPause")) {
+//            postFix += ("Finishing:" + isFinishing());
+//        }
+//
+//        Log.d(TAG, "[==== " + activityName + " ====]:" + lifecycle + postFix + "\n");
     }
 }
