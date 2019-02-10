@@ -42,13 +42,13 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment impleme
     public void show(Fragment fragment, String tag) {
         setTargetFragment(fragment, -1);
         saveLifecycle(fragment);
-        super.show(fragment.getChildFragmentManager(), tag);
+        super.show(fragment.getFragmentManager(), tag);
     }
 
     public void showNow(Fragment fragment, String tag) {
         setTargetFragment(fragment, -1);
         saveLifecycle(fragment);
-        super.showNow(fragment.getChildFragmentManager(), tag);
+        super.showNow(fragment.getFragmentManager(), tag);
     }
 
     /**
