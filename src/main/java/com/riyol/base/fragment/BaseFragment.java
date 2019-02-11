@@ -89,10 +89,11 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onStop() {
-        if (loadingDialog != null && loadingDialog.isVisible()) {
-            loadingDialog.dismissAllowingStateLoss();
-            loadingDialog = null;
-        }
+//        if (loadingDialog != null && loadingDialog.isVisible()) {
+//            loadingDialog.dismissAllowingStateLoss();
+//            loadingDialog = null;
+//        }
+        hideLoadingDialog();
         super.onStop();
         debugLifecycleMethodLog("onStop");
 
@@ -168,12 +169,15 @@ public abstract class BaseFragment extends Fragment {
 
         if (!loadingDialog.isVisible()) {
             loadingDialog.show(this);
+            debugLifecycleMethodLog("showLoadingDialog");
         }
     }
 
     protected void hideLoadingDialog() {
         if (loadingDialog != null) {
             loadingDialog.dismissAllowingStateLoss();
+            loadingDialog = null;
+            debugLifecycleMethodLog("hideLoadingDialog");
         }
     }
 

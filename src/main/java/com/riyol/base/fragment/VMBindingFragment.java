@@ -30,9 +30,10 @@ public abstract class VMBindingFragment<VM extends BaseViewModel, VB extends Vie
             boolean shareViewModel = shouldShareViewModel();
             ViewModelProvider viewModelProvider = shareViewModel ?
                     ViewModelProviders.of(getActivity()) : ViewModelProviders.of(this, factory);
-            viewModel = viewModelProvider.get((Class<VM>)viewModelClass);
+            viewModel = viewModelProvider.get((Class<VM>) viewModelClass);
+
+            viewModel.getNavigateObservable().observe(this, nav -> onNavigate(nav));
             if (!shareViewModel) {
-                viewModel.getNavigateObservable().observe(this, nav -> onNavigate(nav));
                 viewModel.getThrowableObservable().observe(this, throwable -> onThrowable(throwable));
                 viewModel.getLoadStateObservable().observe(this, loading -> onLoadState(loading));
             }
