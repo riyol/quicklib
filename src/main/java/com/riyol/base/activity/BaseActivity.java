@@ -187,7 +187,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         showToast(getString(strId));
     }
 
-    final protected void showToast(String message) {
+    final protected void showToast(CharSequence message) {
         ToastUtil.showToast(getApplicationContext(), message);
     }
 

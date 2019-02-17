@@ -10,7 +10,7 @@ import android.widget.Toast;
  */
 
 public class ToastUtil {
-    private static String sPreviousMsg;
+    private static CharSequence sPreviousMsg;
 
     private static Toast sToast;
 
@@ -18,7 +18,7 @@ public class ToastUtil {
 
     private static long sNextTime;
 
-    public static void showToast(Context context, String msg) {
+    public static void showToast(Context context, CharSequence msg) {
         if (TextUtils.isEmpty(msg)) {
             return;
         }
