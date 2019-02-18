@@ -17,4 +17,5 @@ public enum ActionEnum {
     GUIDE,
     MAIN,
     GOTO,
+    LIST,
 }
