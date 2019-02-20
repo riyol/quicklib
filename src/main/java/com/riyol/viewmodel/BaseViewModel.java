@@ -1,8 +1,8 @@
 package com.riyol.viewmodel;
 
 import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.riyol.function.Optional;
@@ -22,7 +22,7 @@ import io.reactivex.disposables.Disposable;
  * Created by riyol on 2018/4/12.
  */
 
-public abstract class BaseViewModel extends ViewModel {
+public abstract class BaseViewModel extends AndroidViewModel {
     protected final Application application;
     private MutableLiveData<Throwable> throwable;
 
@@ -35,9 +35,11 @@ public abstract class BaseViewModel extends ViewModel {
     private final CompositeDisposable compositeDisposable;
 
     public BaseViewModel(Application application) {
+        super(application);
         this.application = application;
         compositeDisposable = new CompositeDisposable();
     }
+
 
     public BaseViewModel() {
         this(null);

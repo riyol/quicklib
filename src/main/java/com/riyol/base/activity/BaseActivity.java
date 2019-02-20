@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -150,8 +151,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     final protected void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
+            view.clearFocus();
             InputMethodManager imm = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
+            Log.e("KeyBoard", "status:" + imm.isActive() + " accept text:" + imm.isAcceptingText());
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
