@@ -185,7 +185,7 @@ public abstract class BaseFragment extends Fragment {
         showToast(getString(strId));
     }
 
-    final protected void showToast(String message) {
+    final protected void showToast(CharSequence message) {
         ToastUtil.showToast(getActivity().getApplicationContext(), message);
     }
 

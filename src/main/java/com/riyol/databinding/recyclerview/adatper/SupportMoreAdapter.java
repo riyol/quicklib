@@ -6,36 +6,40 @@ import android.support.annotation.LayoutRes;
 import com.riyol.quicklib.BR;
 import java.util.List;
 
-import static com.riyol.databinding.recyclerview.adatper.SupportMoreListener.BOTTOM_END;
-import static com.riyol.databinding.recyclerview.adatper.SupportMoreListener.BOTTOM_LOADING;
+import static com.riyol.databinding.recyclerview.adatper.LoadMoreState.END;
+import static com.riyol.databinding.recyclerview.adatper.LoadMoreState.HIDE;
+import static com.riyol.databinding.recyclerview.adatper.LoadMoreState.LOADING;
 
 
 public abstract class SupportMoreAdapter<V extends ViewDataBinding> extends ListBindingAdapter<V> {
 
-    private ObservableInt status = new ObservableInt(BOTTOM_LOADING);
+    private ObservableInt state = new ObservableInt(HIDE);
 
-    private SupportMoreListener listener;
+    private LoadMoreListener listener;
 
-    public SupportMoreAdapter(SupportMoreListener listener) {
+    public SupportMoreAdapter(LoadMoreListener listener) {
         this.listener = listener;
     }
 
-    public SupportMoreAdapter(List<?> items, SupportMoreListener listener) {
+    public SupportMoreAdapter(List<?> items, LoadMoreListener listener) {
         super(items);
         this.listener = listener;
     }
 
     @Override
     public void onBindViewHolder(BindingViewHolder<V> holder, int position) {
-
         if (items.size() > 0 && position == items.size()) {
-            holder.getBinding().setVariable(BR.viewModel, status);
+            holder.getBinding().setVariable(BR.viewModel, state);
             holder.getBinding().setVariable(BR.presenter, listener);
             if (listener.canLoadMore()) {
-                status.set(BOTTOM_LOADING);
+                state.set(LOADING);
                 listener.loadMore();
             } else {
-                status.set(BOTTOM_END);
+                if (listener.showEnd()) {
+                    state.set(END);
+                } else {
+                    state.set(HIDE);
+                }
             }
             holder.getBinding().executePendingBindings();
 
@@ -66,8 +70,8 @@ public abstract class SupportMoreAdapter<V extends ViewDataBinding> extends List
     abstract int layoutBottomRes();
 
 
-    public void setStatus(int status) {
-        this.status.set(status);
+    public void setState(int state) {
+        this.state.set(state);
     }
 
 }
