@@ -15,14 +15,13 @@ public class KeyboardObserver {
             Rect rect = new Rect();
             parent.getWindowVisibleDisplayFrame(rect);
 
-            int childBottom = child.getBottom();
-            int windowBottom = rect.bottom - rect.top;
-//            Log.d("KeyboardObserver", "parent bottom:" + parent.getBottom()
-//                    + " child bottom:" + childBottom
-//                    + " visible rect:" + rect.toString());
+            int[] location = new int[2];
+            child.getLocationInWindow(location);
+            int childBottom = location[1] + child.getHeight();
+            int windowBottom = rect.bottom;
 
             if (childBottom > windowBottom) {
-                parent.scrollTo(0, childBottom - windowBottom);
+                parent.scrollTo(0, childBottom - windowBottom+4);
             } else {
                 parent.scrollTo(0, 0);
             }
