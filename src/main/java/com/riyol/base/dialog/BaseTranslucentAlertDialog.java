@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 import com.riyol.quicklib.R;
 
 
-public abstract class BaseTranslucentDialog extends BaseDialogFragment {
+public abstract class BaseTranslucentAlertDialog extends BaseDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(AppCompatDialogFragment.STYLE_NO_TITLE, R.style.TranslucentDialog);
+        setStyle(AppCompatDialogFragment.STYLE_NO_TITLE, R.style.TranslucentAlertDialog);
         // Retain this fragment across configuration changes.
         setRetainInstance(true);
         setCancelable(false);

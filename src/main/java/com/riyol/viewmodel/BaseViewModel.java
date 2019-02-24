@@ -111,11 +111,11 @@ public abstract class BaseViewModel extends AndroidViewModel {
         return navigateSupplier.get();
     }
 
-    final public void setNavigate(Navigate nav) {
+    final protected void setNavigate(Navigate nav) {
         Optional.ofNullable(this.navigate).ifPresent(data -> data.setValue(nav));
     }
 
-    final public void setNavigate(ActionEnum action){
+    final protected void setNavigate(ActionEnum action){
         setNavigate(Navigate.create(action));
     }
 

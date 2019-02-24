@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="status"
+            type="com.riyol.databinding.recyclerview.adatper.LoadMoreState"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="android.databinding.ObservableInt"/>
+
+        <variable
+            name="presenter"
+            type="com.riyol.databinding.recyclerview.adatper.LoadMoreListener"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:visibility="@{viewModel == status.HIDE? View.GONE:View.VISIBLE}"
+        android:layout_height="@dimen/list_bottom_height">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:visibility="@{viewModel == status.LOADING? View.VISIBLE:View.GONE}"
+            >
+
+            <android.support.v4.widget.ContentLoadingProgressBar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            </android.support.v4.widget.ContentLoadingProgressBar>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:text="@string/list_loading"
+                tools:text="Loading"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>

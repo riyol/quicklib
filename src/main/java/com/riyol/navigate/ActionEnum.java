@@ -18,4 +18,6 @@ public enum ActionEnum {
     MAIN,
     GOTO,
     LIST,
+    LIST_LOAD_ERROR,
+    LIST_LOAD_END,
 }

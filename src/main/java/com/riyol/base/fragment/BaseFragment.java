@@ -203,6 +203,12 @@ public abstract class BaseFragment extends Fragment {
         startActivity(intent);
     }
 
+    final protected void startActivityForClearTask(Class<? extends Activity> cls) {
+        Intent intent = new Intent(this.getActivity(), cls);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     /**
      * Runtime permiss
      **/

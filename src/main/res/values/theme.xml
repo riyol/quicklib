@@ -9,6 +9,18 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="TranslucentAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
+        <item name="colorPrimary">@color/primary_material_light</item>
+        <item name="colorAccent">@color/accent_material_light</item>
+        <!--<item name="colorAccent">?colorAccent</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMinor">@dimen/windowMinWidthMinor</item>
+    </style>
+    
+    <item name="windowMinWidthMinor" type="dimen">85%</item>
+
     <style name="cusToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:minWidth">0dp</item>  <!--default 56dp-->
         <item name="android:paddingLeft">16dp</item>

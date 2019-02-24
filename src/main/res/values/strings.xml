@@ -11,4 +11,9 @@
     <string name="permission_name_location">位置信息</string>
     <string name="permission_name_storage">存储空间</string>
     <string name="permission_setting">去开启权限</string>
+
+    <string name="list_loading">正在加载...</string>
+    <string name="list_load_error">加载出错，点击重试</string>
+    <string name="list_no_more_data">没有更多数据</string>
+    <string name="list_empty_data">没有数据</string>
 </resources>
