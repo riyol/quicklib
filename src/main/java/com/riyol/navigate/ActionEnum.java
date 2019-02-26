@@ -20,4 +20,5 @@ public enum ActionEnum {
     LIST,
     LIST_LOAD_ERROR,
     LIST_LOAD_END,
+    REFRESH,
 }
