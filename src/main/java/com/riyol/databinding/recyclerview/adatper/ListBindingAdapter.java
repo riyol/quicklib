@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.riyol.quicklib.BR;
 
 import java.util.Collections;
@@ -66,8 +67,16 @@ public abstract class ListBindingAdapter<V extends ViewDataBinding> extends Recy
         if (items.isEmpty() && layoutEmptyRes() != 0) {
             return layoutEmptyRes();
         } else {
+            Object item = items.get(position);
+            if (item instanceof ItemType) {
+                return layoutResOfType(((ItemType) item).getItemType());
+            }
             return layoutRes();
         }
+    }
+
+    protected int layoutResOfType(int type) {
+        return layoutRes();
     }
 
     protected abstract @LayoutRes
