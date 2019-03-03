@@ -21,24 +21,24 @@ public abstract class VMBindingFragment<VM extends BaseViewModel, VB extends Vie
     @Override
     protected void performNext(Bundle savedState) {
         super.performNext(savedState);
+        boolean shareViewModel = shouldShareViewModel();
         if (viewModel == null) {
             Supplier<VM> supplier = provideViewModelSupplier();
             ViewModelProvider.Factory factory = supplier == null ? null : ViewModelProviderFactory.create(supplier);
             Class<?> viewModelClass = getViewModelClass();//provideViewModelClass();
             Objects.requireNonNull(viewModelClass, "viewModelClass is null");
-
-            boolean shareViewModel = shouldShareViewModel();
             ViewModelProvider viewModelProvider = shareViewModel ?
                     ViewModelProviders.of(getActivity()) : ViewModelProviders.of(this, factory);
             viewModel = viewModelProvider.get((Class<VM>) viewModelClass);
-
-            viewModel.getNavigateObservable().observe(this, nav -> onNavigate(nav));
-            if (!shareViewModel) {
-                viewModel.getThrowableObservable().observe(this, throwable -> onThrowable(throwable));
-                viewModel.getLoadStateObservable().observe(this, loading -> onLoadState(loading));
-            }
-            viewBinding.setVariable(BR.viewModel, viewModel);
         }
+
+        viewModel.getNavigateObservable().observe(this, nav -> onNavigate(nav));
+        if (!shareViewModel) {
+            viewModel.getThrowableObservable().observe(this, throwable -> onThrowable(throwable));
+            viewModel.getLoadStateObservable().observe(this, loading -> onLoadState(loading));
+        }
+        viewBinding.setVariable(BR.viewModel, viewModel);
+
         setupView(savedState);
     }
 
