@@ -15,9 +15,12 @@
  */
 package com.riyol.view.divider;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
+
+import com.riyol.view.DimenUtil;
 
 /**
  * <p>Divider of {@code RecyclerView}, you can get the width and height of the line.</p>
@@ -44,6 +47,15 @@ public abstract class Divider extends RecyclerView.ItemDecoration {
             return new Api21ItemDivider(color);
         }
         return new Api20ItemDivider(color);
+    }
+
+    public static Divider getDivider(Context context, @ColorInt int color, int widthDp, int heightDp) {
+        int width = (int) DimenUtil.dpToPx(context, widthDp);
+        int height = (int) DimenUtil.dpToPx(context, heightDp);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return new Api21ItemDivider(color, width, height);
+        }
+        return new Api20ItemDivider(color, width, height);
     }
 
 }
