@@ -49,7 +49,6 @@ public class CleanableEditText extends AppCompatEditText implements TextWatcher 
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
-        // Load attributes
         final TypedArray a =
                 getContext().obtainStyledAttributes(attrs, R.styleable.CleanableEditText, defStyle, 0);
 
