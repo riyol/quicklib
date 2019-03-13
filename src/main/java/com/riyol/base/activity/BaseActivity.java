@@ -222,13 +222,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    private MaterialAlertDialog rationaleDialog;
+//    private MaterialAlertDialog rationaleDialog;
     protected PermissionHelper.RationaleCallback rationaleCallback = (permissions) -> {
-        if (rationaleDialog != null) {
-            return;
-        }
+//        if (rationaleDialog != null) {
+//            return;
+//        }
         List<String> message = PermissionHelper.transformText(getApplicationContext(), permissions);
-        rationaleDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
+        MaterialAlertDialog rationaleDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
                 .setTitle(R.string.permission_rationale_title)
                 .setMessage(String.format(getString(R.string.permission_rationale_message),
                         TextUtils.join("\n", message)))
@@ -241,13 +241,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     };
 
-    private MaterialAlertDialog deniedDialog;
+//    private MaterialAlertDialog deniedDialog;
     protected PermissionHelper.DeniedCallback deniedCallback = permissions -> {
-        if (deniedDialog != null) {
-            return;
-        }
+//        if (deniedDialog != null) {
+//            return;
+//        }
         List<String> message = PermissionHelper.transformText(getApplicationContext(), permissions);
-        deniedDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
+        MaterialAlertDialog deniedDialog = MaterialAlertDialog.newBuilder(getApplicationContext())
                 .setTitle(R.string.permission_denied_title)
                 .setMessage(String.format(getString(R.string.permission_rationale_message),
                         TextUtils.join("\n", message)))

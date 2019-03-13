@@ -124,9 +124,9 @@ public class PermissionHelper {
     }
 
     public void request(@NonNull Activity activity) {
-        if (interceptRequest(activity)) {
-            return;
-        }
+//        if (interceptRequest(activity)) {
+//            return;
+//        }
         ActivityCompat.requestPermissions(activity, getPermissionArray(),
                 REQUEST_CODE_FOR_ACTIVITY);
     }
